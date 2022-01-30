@@ -1,135 +1,93 @@
-const loadButton = document.getElementById("load");
+const arrInput = document.getElementById("arr-input");
 const sortButton = document.getElementById("sort");
 const sortArea = document.getElementById("area");
+const info = document.getElementById("info");
 
-const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
+let maxLength = 1;
+let arr = [];
+const inners = [];
+const outers = [];
 
-function bsp(array) {
-    n = array.length;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n - i; j++) {
-            if (array[j] > array[j + 1]) {
-                [array[j], array[j + 1]] = [array[j + 1], array[j]];
-            }
-        }
-    }
-    return array;
-}
+let ant = 2;
+document.documentElement.style.setProperty("--at", ant + "s");
 
-let arr = [43, 31, 14, 9, 6, 3];
+alert(
+    "Hi!\nyou can input the list as comma separated numbers\n(without brackets)"
+);
 
-function load() {
-    arr.forEach((el) => {
-        let out1 = document.createElement("div");
-        out1.classList.add("outer");
+const swap = async (i) => {
+    return new Promise((resolve) => {
+        in1 = inners[i];
+        in2 = inners[i + 1];
 
-        let cd = document.createElement("div");
-        cd.setAttribute("hidden", "");
-        cd.classList.add("caret");
-        cd.classList.add("caret-down");
-
-        let out2 = document.createElement("div");
-        out2.classList.add("outer2");
-
-        let e = document.createElement("div");
-        e.classList.add("el");
-        e.innerText = el;
-        out2.appendChild(e);
-
-        let cu = document.createElement("div");
-        cu.setAttribute("hidden", "");
-        cu.classList.add("caret");
-        cu.classList.add("caret-up");
-
-        out1.appendChild(cd);
-        out1.appendChild(out2);
-        out1.appendChild(cu);
-        sortArea.appendChild(out1);
+        out1 = outers[i];
+        out2 = outers[i + 1];
+        out1.style.backgroundColor = out2.style.backgroundColor = "pink";
+        let m1 = classDiv("el", "mover", "move-up");
+        let m2 = classDiv("el", "mover", "move-down");
+        m1.innerText = in1.innerText;
+        m2.innerText = in2.innerText;
+        in1.hidden = in2.hidden = true;
+        out1.appendChild(m1);
+        out2.appendChild(m2);
+        m1.onanimationend = () => {
+            [in1.innerText, in2.innerText] = [in2.innerText, in1.innerText];
+            m1.remove();
+            m2.remove();
+            in1.hidden = in2.hidden = false;
+            setTimeout(resolve, 600);
+        };
     });
-}
-
-function createmov(par) {
-    let mov = document.createElement("div");
-    mov.classList.add("el", "mover");
-    let el = par.firstElementChild;
-    el.setAttribute("hidden", "");
-    mov.innerText = el.innerText;
-    par.appendChild(mov);
-    return [el, mov];
-}
-
-function swap2(a, b) {
-    m = createmov(f[a]);
-    n = createmov(f[b]);
-
-    m2 = m[1];
-    n2 = n[1];
-    m2.style.animation = "swap-up 2s ease-in-out forwards";
-    n2.style.animation = "swap-down 2s ease-in-out forwards";
-
-    m1 = m[0];
-    n1 = n[0];
-
-    setTimeout(() => {
-        m2.remove();
-        n2.remove();
-        m1.removeAttribute("hidden");
-        n1.removeAttribute("hidden");
-
-        [m1.innerText, n1.innerText] = [n1.innerText, m1.innerText];
-    }, 2050);
-}
-
-loadButton.onclick = () => {
-    load();
-    f = [];
-    Array.from(sortArea.children).forEach((r) => {
-        f.push(r.children[1]);
-    });
-
-    sortButton.onclick = () => {
-        // swap2(3, 4);
-        bs2(arr);
-    };
 };
 
-p = console.log;
-
-async function bs2(array) {
-    a = Array.from(sortArea.children);
-    n = array.length;
-    var et = 0;
-    t = 0;
-
-    for (let i = 0; i < a.length; i++) {
-        for (let j = 0; j < n - i - 1; j++) {
-            setTimeout(async () => {
-                if (array[j] > array[j + 1]) {
-                    [array[j], array[j + 1]] = [array[j + 1], array[j]];
-                    swap2(j, j + 1);
-                    await sleep(4000);
-                }
-            }, (et += 2300));
-        }
-    }
+function classDiv(...cl) {
+    const div = document.createElement("div");
+    div.classList.add(...cl);
+    return div;
 }
 
-//  function bs2(array) {
-//     a = Array.from(sortArea.children);
-//     n = array.length;
-//     et = 0;
-//     t = 0;
-//     for (let i = 0; i < n; i++) {
-//         // setTimeout(() => {
-//             p("bubble", i);
-//             for (let j = 0; j < n - i - 1; j++) {
-//                 // setTimeout(() => {
-//                     if (array[j] > array[j + 1]) {
-//                         [array[j], array[j + 1]] = [array[j + 1], array[j]];
-//                         swap2(j, j + 1);
-//                     }
-//                 // }, (2300*j));
-//             }
-//         // },  2300 *(n-i-1)*(n-i));
-//     }
-// }
+const sleep = (s) => new Promise((resolve) => setTimeout(resolve, s * 1000));
+
+sortButton.onclick = () => {
+    arr = arrInput.value
+        .replace(/[^0-9\.,]/g, "")
+        .split(",")
+        .filter((o) => o)
+        .map((s) => +s);
+    arrInput.value = arr;
+    arr.forEach((num) => {
+        let numLength = num.toString().length;
+        if (numLength > maxLength) maxLength = numLength;
+
+        let out = classDiv("out");
+        let el = classDiv("el");
+        el.innerText = num;
+        out.appendChild(el);
+        sortArea.appendChild(out);
+        inners.push(el);
+        outers.push(out);
+    });
+    document.documentElement.style.setProperty("--nw", maxLength + "ch");
+
+    bs();
+    sortButton.disabled = true;
+};
+
+async function bs() {
+    const n = arr.length;
+    for (let i = 0; i < n - 1; i++) {
+        console.log("bubble", i + 1);
+        for (let j = 0; j < n - i - 1; j++) {
+            info.innerText = `Bubble ${i + 1}, Step ${j + 1}`;
+            if (arr[j] > arr[j + 1]) {
+                console.log(arr[j], ">", arr[j + 1], "swapping");
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                await swap(j);
+            } else {
+                console.log(arr[j], "<", arr[j + 1], "nothing");
+                await sleep(ant);
+            }
+        }
+        await sleep(1);
+    }
+}
