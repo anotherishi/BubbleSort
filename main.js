@@ -86,7 +86,7 @@ sortButton.onclick = () => {
         document.documentElement.style.setProperty("--nw", maxLength + "ch");
 
         bs();
-        sortButton.disabled = true;
+        sortButton.disabled = arrInput.disabled = true;
     } catch {
         info.innerHTML = "looks like something's wrong<br> please reset";
     }
