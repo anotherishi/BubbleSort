@@ -1,7 +1,7 @@
 :root {
     --nw: 1ch;
     --at: 3s;
-    --dbtb: calc(var(--nw) + 8ch);
+    --dbtb: calc(var(--nw) + 6ch);
 }
 
 * {
@@ -39,13 +39,13 @@ input {
 }
 
 .out {
-    padding: 8ch 2ch;
+    padding: 6ch 1.5ch;
     transition: background-color 100ms ease-in-out;
 }
 
 .el {
-    width: calc(var(--nw) + 4ch);
-    line-height: calc(var(--nw) + 4ch);
+    width: calc(var(--nw) + 3ch);
+    line-height: calc(var(--nw) + 3ch);
     text-align: center;
     border: 1px solid;
     border-radius: 1ch;

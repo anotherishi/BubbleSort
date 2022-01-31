@@ -20,6 +20,7 @@ const swap = async (i, j) => {
     out2 = outers[j + 1];
     out1.style.backgroundColor = out2.style.backgroundColor = "pink";
     if (arr[j] > arr[j + 1]) {
+        console.log(arr[j], ">", arr[j + 1], "   swapping");
         info.innerHTML = `Bubble ${i + 1}, Step ${j + 1} <br>Swapping...`;
         return new Promise((resolve) => {
             in1 = inners[j];
@@ -34,6 +35,7 @@ const swap = async (i, j) => {
             out2.appendChild(m2);
             m1.onanimationend = () => {
                 [in1.innerText, in2.innerText] = [in2.innerText, in1.innerText];
+                [arr[j],arr[j+1]]=[arr[j+1], arr[j]]
                 m1.remove();
                 m2.remove();
                 in1.hidden = in2.hidden = false;
@@ -44,6 +46,7 @@ const swap = async (i, j) => {
             };
         });
     } else {
+        console.log(arr[j], "<", arr[j + 1], "   nothing");
         info.innerHTML = `Bubble ${i + 1}, Step ${
             j + 1
         } <br>already arranged...`;
@@ -95,8 +98,8 @@ async function bs() {
     const n = arr.length;
     for (let i = 0; i < n - 1; i++) {
         console.log("bubble", i + 1);
-        let j = 0;
-        for (; j < n - i - 1; j++) {
+        
+        for (let j = 0; j < n - i - 1; j++) {
             info.innerText = `Bubble ${i + 1}, Step ${j + 1}`;
             // if (arr[j] > arr[j + 1]) {
             //     console.log(arr[j], ">", arr[j + 1], "swapping");
@@ -108,14 +111,14 @@ async function bs() {
             // }
             await swap(i, j);
         }
-        inners[j].style.backgroundColor = "lightgreen";
-        j = 0;
+        // inners[j].style.backgroundColor = "lightgreen";
+
         await sleep(1);
         if (!als) {
             alert(
                 "green colored elements have occupied thier correct position!"
             );
-            als=true
+            als = true;
         }
     }
     inners[0].style.backgroundColor = "lightgreen";
