@@ -122,4 +122,5 @@ async function bs() {
         }
     }
     inners[0].style.backgroundColor = "lightgreen";
+    info.innerHTML = "List is now sorted!!"
 }
