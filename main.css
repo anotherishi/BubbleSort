@@ -1,6 +1,6 @@
 :root {
     --nw: 1ch;
-    --at: 3s;
+    --anim-duration: 3s;
     --dbtb: calc(var(--nw) + 6ch);
 }
 
@@ -38,12 +38,13 @@ input {
     overflow-x: scroll;
 }
 
-.out {
+/* .out {
     padding: 6ch 1.5ch;
     transition: background-color 100ms ease-in-out;
-}
+} */
 
 .el {
+    margin: 6ch 1.5ch;
     width: calc(var(--nw) + 3ch);
     line-height: calc(var(--nw) + 3ch);
     text-align: center;
@@ -55,7 +56,7 @@ input {
 .mover {
     background-color: #7fe5ff;
     animation-timing-function: linear;
-    animation-duration: var(--at);
+    animation-duration: var(--anim-duration);
     animation-fill-mode: forwards;
 }
 

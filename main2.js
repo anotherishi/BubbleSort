@@ -38,6 +38,7 @@ const swap = async (i) => {
             setTimeout(resolve, 600);
         };
     });
+    voidrishi;
 };
 
 function classDiv(...cl) {
@@ -91,3 +92,4 @@ async function bs() {
         await sleep(1);
     }
 }
+

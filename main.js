@@ -11,7 +11,7 @@ const outers = [];
 let ant = 2;
 document.documentElement.style.setProperty("--at", ant + "s");
 
-alert(
+console.log(
     "Hi!\nyou can input the list as comma separated numbers\n(without brackets)"
 );
 
