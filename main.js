@@ -11,9 +11,7 @@ const outers = [];
 let ant = 2;
 document.documentElement.style.setProperty("--at", ant + "s");
 
-alert(
-    "Hi!\nyou can input the list as comma separated numbers\n(without brackets)"
-);
+("Hi!\nyou can input the list as comma separated numbers\n(without brackets)");
 
 const swap = async (i, j) => {
     out1 = outers[j];
@@ -40,16 +38,13 @@ const swap = async (i, j) => {
                 m2.remove();
                 in1.hidden = in2.hidden = false;
 
-                out1.style.backgroundColor = out2.style.backgroundColor =
-                    "white";
+                out1.style.backgroundColor = out2.style.backgroundColor = "white";
                 setTimeout(resolve, 600);
             };
         });
     } else {
         console.log(arr[j], "<", arr[j + 1], "   nothing");
-        info.innerHTML = `Bubble ${i + 1}, Step ${
-            j + 1
-        } <br>already arranged...`;
+        info.innerHTML = `Bubble ${i + 1}, Step ${j + 1} <br>already arranged...`;
         await sleep(ant);
     }
     out1.style.backgroundColor = out2.style.backgroundColor = "white";
@@ -115,12 +110,10 @@ async function bs() {
 
         await sleep(1);
         if (!als) {
-            alert(
-                "green colored elements have occupied thier correct position!"
-            );
+            console.log("green colored elements have occupied thier correct position!");
             als = true;
         }
     }
     inners[0].style.backgroundColor = "lightgreen";
-    info.innerHTML = "List is now sorted!!"
+    info.innerHTML = "List is now sorted!!";
 }

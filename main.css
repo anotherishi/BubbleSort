@@ -66,6 +66,7 @@ input {
     animation-name: swap-down;
 }
 
+/* 5 segment animation:
 @keyframes swap-up {
     0% {
         transform: translate(0, 0);
@@ -131,20 +132,35 @@ input {
         transform: translate(calc(var(--dbtb) * -1), 0);
     }
 }
+*/
 
-/* 
 @keyframes swap-up {
     0% {
         transform: translate(0, 0);
     }
-    30% {
-        transform: translate(0, -5vh);
+    12.5% {
+        transform: translate(calc(var(--dbtb) * 0.038), calc(var(--dbtb) * -0.191));
     }
-    70% {
-        transform: translate(calc(var(--nw) + 8ch), -5vh);
+    25% {
+        transform: translate(calc(var(--dbtb) * 0.146), calc(var(--dbtb) * -0.353));
+    }
+    37.5% {
+        transform: translate(calc(var(--dbtb) * 0.308), calc(var(--dbtb) * -0.462));
+    }
+    50% {
+        transform: translate(calc(var(--dbtb) * 0.5), calc(var(--dbtb) * -0.5));
+    }
+    62.5% {
+        transform: translate(calc(var(--dbtb) * 0.691), calc(var(--dbtb) * -0.462));
+    }
+    75% {
+        transform: translate(calc(var(--dbtb) * 0.853), calc(var(--dbtb) * -0.353));
+    }
+    87.5% {
+        transform: translate(calc(var(--dbtb) * 0.961), calc(var(--dbtb) * -0.191));
     }
     100% {
-        transform: translate(calc(var(--nw) + 8ch), 0);
+        transform: translate(var(--dbtb), 0);
     }
 }
 
@@ -152,13 +168,29 @@ input {
     0% {
         transform: translate(0, 0);
     }
-    30% {
-        transform: translate(0, 5vh);
+    12.5% {
+        transform: translate(calc(var(--dbtb) * -0.038), calc(var(--dbtb) * 0.191));
     }
-    70% {
-        transform: translate(calc(0ch - calc(var(--nw) + 8ch)), 5vh);
+    25% {
+        transform: translate(calc(var(--dbtb) * -0.146), calc(var(--dbtb) * 0.353));
+    }
+    37.5% {
+        transform: translate(calc(var(--dbtb) * -0.308), calc(var(--dbtb) * 0.462));
+    }
+    50% {
+        transform: translate(calc(var(--dbtb) * -0.5), calc(var(--dbtb) * 0.5));
+    }
+    62.5% {
+        transform: translate(calc(var(--dbtb) * -0.691), calc(var(--dbtb) * 0.462));
+    }
+    75% {
+        transform: translate(calc(var(--dbtb) * -0.853), calc(var(--dbtb) * 0.353));
+    }
+    87.5% {
+        transform: translate(calc(var(--dbtb) * -0.961), calc(var(--dbtb) * 0.191));
     }
     100% {
-        transform: translate(calc(0ch - calc(var(--nw) + 8ch)), 0);
+        transform: translate(calc(0ch - var(--dbtb)), 0);
     }
-} */
+}
+
